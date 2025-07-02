@@ -1,6 +1,7 @@
 package edu.arsw.persistence.controllers;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,18 +12,21 @@ import edu.arsw.persistence.services.UserServiceMongo;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/mongo/users")
+@RequestMapping("/users")
+@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class UserControllerMongo {
-    private final UserServiceMongo userServiceMongo;
+
+    private final UserServiceMongo userService;
 
     @GetMapping
     public List<User> getAll() {
-        return userServiceMongo.getAllUsers();
+        return userService.getAllUsers();
     }
 
     @PostMapping
     public User create(@RequestBody User user) {
-        return userServiceMongo.createUser(user);
+        return userService.createUser(user);
     }
+
 }
